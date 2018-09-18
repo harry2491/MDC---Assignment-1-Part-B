@@ -134,6 +134,7 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/home'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
