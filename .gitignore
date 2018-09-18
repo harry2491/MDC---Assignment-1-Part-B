@@ -1,3 +1,4 @@
 db.sqlite3
 crm/__pycache__
 mfcrm/__pycache__
+mfscrm/local_settings.py
