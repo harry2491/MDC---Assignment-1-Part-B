@@ -22,5 +22,5 @@ urlpatterns = [
     path('customer/<int:pk>/summary/', views.summary, name='summary'),
     path('product/<int:pk>/summary/', views.summary, name='summary'),
     path('signup/', views.sign_up, name='sign_up'),
-    path('password/', views.change_password, name = 'change_password'),
+    path('password/', views.change_password, name='change_password'),
 ]

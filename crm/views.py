@@ -174,7 +174,7 @@ def sign_up(request):
             return render(request, 'crm/home.html')
     else:
         form = UserForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, 'registration/sign_up.html', {'form': form})
 
 @login_required
 def change_password(request):
