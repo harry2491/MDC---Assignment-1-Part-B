@@ -1,5 +1,6 @@
 from django import forms
 from .models import Customer, Service, Product
+from django.contrib.auth.models import User
 
 
 class CustomerForm(forms.ModelForm):
@@ -17,3 +18,9 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('cust_name', 'product', 'p_description', 'quantity', 'pickup_time', 'charge')
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')

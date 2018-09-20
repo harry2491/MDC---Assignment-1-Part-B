@@ -1,8 +1,12 @@
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import*
 from .forms import*
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
 from django.db.models import Sum
+
 
 # Create your views here.
 
@@ -155,3 +159,32 @@ def summary(request, pk):
                                                     'services': services,
                                                     'sum_service_charge': sum_service_charge,
                                                     'sum_product_charge': sum_product_charge,})
+
+def sign_up(request):
+    if request.method=="POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user.set_password(password)
+            user.save()
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return render(request, 'crm/home.html')
+    else:
+        form = UserForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
+@login_required
+def change_password(request):
+    if request.method=='POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Password updated successfully!')
+            return render(request, 'crm/home.html')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {'form': form})
