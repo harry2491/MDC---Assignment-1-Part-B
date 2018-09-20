@@ -26,7 +26,7 @@ class Customer(models.Model):
         self.updated_date = timezone.now()
         self.save()
 
-    def str_(self):
+    def __str__(self):
         return str(self.cust_name)
 
 class Service(models.Model):
